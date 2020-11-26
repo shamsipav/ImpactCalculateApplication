@@ -1,43 +1,58 @@
-﻿@*@model IndexViewModel;*@
+﻿@model IndexViewModel;
 @{
     ViewData["Title"] = "Result";
 }
 
-<div class="main-head text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Исходные данные</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Параметр</td>
+            <td>Значение</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Расход воздуха, м3/ч</td>
+            <td>@Model.Input.Air_Spend</td>
+        </tr>
+        <tr>
+            <td>Давление воздуха, мбар</td>
+            <td>@Model.Input.Air_Pressure</td>
+        </tr>
+        <tr>
+            <td>Температура подогрева воздуха, *C</td>
+            <td>@Model.Input.Air_Temperature</td>
+        </tr>
+        <tr>
+            <td>Температура подогрева воздуха, *C</td>
+            <td>@Model.Input.Smoke_Temperature</td>
+        </tr>
+        <tr>
+            <td>Вязкость, усл. ед.</td>
+            <td>@Model.Input.Viscosity</td>
+        </tr>
+        <tr>
+            <td>Температура расплава, *C</td>
+            <td>@Model.Input.Melt_Temperature</td>
+        </tr>
+        <tr>
+            <td>Содержание CO, %</td>
+            <td>@Model.Input.CO_Percentage</td>
+        </tr>
+        <tr>
+            <td>Содержание CO2, %</td>
+            <td>@Model.Input.CO2_Percentage</td>
+        </tr>
+        <tr>
+            <td>Содержание N2, %</td>
+            <td>@Model.Input.N2_Percentage</td>
+        </tr>
+        <tr>
+            <td>Содержание O2, %</td>
+            <td>@Model.Input.O2_Percentage</td>
+        </tr>
+    </tbody>
+</table>
 
-<div class="main-content">
-    <h3>Исходные данные</h3>
-    <form form action="/Home/Index" method="post">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Смены</th>
-                    <th scope="col">Расход воздуха, м3/ч</th>
-                    <th scope="col">Давление воздуха, мбар</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>
-                        <input type="text" name="first_number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>
-                        <input type="text" name="second__number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    </td>
-                </tr>
-                @*<tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                    </tr>*@
-            </tbody>
-        </table>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
+<p>@Model.Result</p>

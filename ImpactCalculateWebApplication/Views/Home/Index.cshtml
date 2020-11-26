@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IndexViewModel;
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -10,32 +11,66 @@
 <div class="main-content">
     <h3>Исходные данные</h3>
     <form form action="/Home/Index" method="post">
-        <table class="table">
+        <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">Смены</th>
-                    <th scope="col">Расход воздуха, м3/ч</th>
-                    <th scope="col">Давление воздуха, мбар</th>
+                    <th>Смены</th>
+                    <th>Расход воздуха, м3/ч</th>
+                    <th>Давление воздуха, мбар</th>
+                    <th>Температура подогрева воздуха, *C</th>
+                    <th>Температура отходящих газов, *C</th>
+                    <th>Вязкость, усл. ед.</th>
+                    <th>Температура расплава, *C</th>
+                    <th>Содержание CO, %</th>
+                    <th>Содержание CO2, %</th>
+                    <th>Содержание N2, %</th>
+                    <th>Содержание O2, %</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>
-                        <input type="text" name="first_number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>
-                        <input type="text" name="second__number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    </td>
-                </tr>
-                @*<tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                </tr>*@
-            </tbody>
+            <tr>
+                <td rowspan="2">1</td>
+                @{
+                    System.Reflection.PropertyInfo[] fields = Model.Input.GetType().GetProperties();
+
+                    for (int i = 0; i < fields.Length; i++)
+                    {
+                       <td>
+                            <input type="text" name="@fields[i].Name" value="@fields[i].GetValue(Model.Input)" class="form-control" id="@fields[i].Name">
+                       </td>
+                    };
+                }
+
+                @*<td>
+                    <input type="text" name="Air_Spend" value="@Model.Input.Air_Spend" class="form-control" id="number1">
+                </td>
+                <td>
+                    <input type="text" name="Air_Pressure" value="@Model.Input.Air_Pressure" class="form-control" id="number1">
+                </td>
+                <td>
+                    <input type="text" name="Air_Temperature" value="@Model.Input.Air_Temperature" class="form-control" id="number1">
+                </td>
+                <td>
+                    <input type="text" name="Smoke_Temperature" value="@Model.Input.Smoke_Temperature" class="form-control" id="number1">
+                </td>
+                <td>
+                    <input type="text" name="Viscosity" value="@Model.Input.Viscosity" class="form-control" id="number1">
+                </td>
+                <td>
+                    <input type="text" name="Melt_Temperature" value="@Model.Input.Melt_Temperature" class="form-control" id="number1">
+                </td>
+                <td>
+                    <input type="text" name="CO_Percentage" value="@Model.Input.CO_Percentage" class="form-control" id="number1">
+                </td>
+                <td>
+                    <input type="text" name="CO2_Percentage" value="@Model.Input.CO2_Percentage" class="form-control" id="number1">
+                </td>
+                <td>
+                    <input type="text" name="N2_Percentage" value="@Model.Input.N2_Percentage" class="form-control" id="number1">
+                </td>
+                <td>
+                    <input type="text" name="O2_Percentage" value="@Model.Input.O2_Percentage" class="form-control" id="number1">
+                </td>*@
+             </tr>
         </table>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

@@ -7,22 +7,32 @@ namespace ImpactCalculateWebApplication.Models
 {
     public class InputDataModel
     {
-        public int Number1 { get; set; }
-        public int Number2 { get; set; }
-        public int Number3 { get; set; }
-        public int Number4 { get; set; }
-        public int Number5 { get; set; }
+        public double Air_Spend { get; set; }
+        public double Air_Pressure { get; set; }
+        public double Air_Temperature { get; set; }
+        public double Smoke_Temperature { get; set; }
+        public double Viscosity { get; set; }
+        public double Melt_Temperature { get; set; }
+        public double CO_Percentage { get; set; }
+        public double CO2_Percentage { get; set; }
+        public double N2_Percentage { get; set; }
+        public double O2_Percentage { get; set; }
 
 
         public static InputDataModel GetDefaulData()
         {
             return new InputDataModel
             {
-                Number1 = 1,
-                Number2 = 1,
-                Number3 = 1,
-                Number4 = 1,
-                Number5 = 1
+                Air_Spend = 5850,
+                Air_Pressure = 70,
+                Air_Temperature = 610.2,
+                Smoke_Temperature = 146.5,
+                Viscosity = 22,
+                Melt_Temperature = 1521,
+                CO_Percentage = 8.7,
+                CO2_Percentage = 12.4,
+                N2_Percentage = 77.67,
+                O2_Percentage = 1.23
             };
         }
     }

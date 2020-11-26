@@ -16,8 +16,6 @@ namespace ImpactCalculateWebApplication.Controllers
         private readonly ILogger<HomeController> _logger;
         //public static int result;
 
-
-
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -26,7 +24,7 @@ namespace ImpactCalculateWebApplication.Controllers
         [HttpPost]
         public IActionResult Index(InputDataModel input)
         {
-            int result = input.Number1 + input.Number2;
+            double result = input.Air_Pressure + input.Air_Spend;
 
             var viewModel = new IndexViewModel
             {
@@ -39,20 +37,14 @@ namespace ImpactCalculateWebApplication.Controllers
 
         public IActionResult Index()
         {
-            CreateDBContext();
-            return View();
+            //CreateDBContext();
+            return View(new IndexViewModel());
         }
 
         public IActionResult Privacy()
         {
             return View();
         }
-
-        //public IActionResult Calculate()
-        //{
-        //    ViewData["result"] = result;
-        //    return View();
-        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
