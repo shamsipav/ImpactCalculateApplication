@@ -1,0 +1,43 @@
+﻿@*@model IndexViewModel;*@
+@{
+    ViewData["Title"] = "Result";
+}
+
+<div class="main-head text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="main-content">
+    <h3>Исходные данные</h3>
+    <form form action="/Home/Index" method="post">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Смены</th>
+                    <th scope="col">Расход воздуха, м3/ч</th>
+                    <th scope="col">Давление воздуха, мбар</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>
+                        <input type="text" name="first_number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>
+                        <input type="text" name="second__number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </td>
+                </tr>
+                @*<tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                    </tr>*@
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
