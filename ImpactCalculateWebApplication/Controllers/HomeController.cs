@@ -15,7 +15,7 @@ namespace ImpactCalculateWebApplication.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         //public static int result;
-
+        //Леш ПИДОР
 
 
         public HomeController(ILogger<HomeController> logger)
