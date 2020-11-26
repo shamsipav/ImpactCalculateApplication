@@ -9,11 +9,18 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
     {
         public InputDataModel Input { get; set; }
 
-        public int Result { get; set; }
+        public ResultDataModel Result { get; set; }
 
         public IndexViewModel()
         {
             Input = InputDataModel.GetDefaulData();
         }
+
+
+
+
+
+
+
     }
 }

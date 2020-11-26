@@ -15,7 +15,7 @@ namespace ImpactCalculateWebApplication.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         //public static int result;
-        //Леш ПИДОР
+        
 
 
         public HomeController(ILogger<HomeController> logger)
@@ -48,11 +48,6 @@ namespace ImpactCalculateWebApplication.Controllers
             return View();
         }
 
-        //public IActionResult Calculate()
-        //{
-        //    ViewData["result"] = result;
-        //    return View();
-        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
