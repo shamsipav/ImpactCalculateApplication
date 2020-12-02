@@ -22,17 +22,42 @@ namespace ImpactCalculateWebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(InputDataModel input)
+        public IActionResult Index(InputDataModel input, string buttonType)
         {
-            double result = input.Air_Pressure + input.Air_Spend;
+            IndexViewModel viewModel = null;
 
-            var viewModel = new IndexViewModel
+            if (buttonType == "Calculate")
             {
-                Result = result,
-                Input = input
-            };
+                double result = input.Air_Pressure + input.Air_Spend;
 
-            return View("Result", viewModel);
+                viewModel = new IndexViewModel
+                {
+                    Result = result,
+                    Input = input
+                };
+
+                return View("Result", viewModel);
+            }
+
+            if (buttonType == "AddNewRow")
+            {
+                var ViewModel = new IndexViewModel();
+
+                IndexViewModel.rowCounter++;
+
+                return View(ViewModel);
+            }
+
+            if (buttonType == "RemoveNewRow")
+            {
+                var ViewModel = new IndexViewModel();
+
+                IndexViewModel.rowCounter--;
+
+                return View(ViewModel);
+            }
+
+            return View(new IndexViewModel());
         }
 
         public IActionResult Index()

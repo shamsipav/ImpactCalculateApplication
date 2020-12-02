@@ -15,5 +15,7 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
         {
             Input = InputDataModel.GetDefaulData();
         }
+
+        public static uint rowCounter = 1;
     }
 }

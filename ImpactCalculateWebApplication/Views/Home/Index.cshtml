@@ -27,51 +27,40 @@
                     <th>Содержание O2, %</th>
                 </tr>
             </thead>
-            <tr>
-                <td rowspan="2">1</td>
-                @{
-                    System.Reflection.PropertyInfo[] fields = Model.Input.GetType().GetProperties();
 
-                    for (int i = 0; i < fields.Length; i++)
-                    {
-                       <td>
-                            <input type="text" name="@fields[i].Name" value="@fields[i].GetValue(Model.Input)" class="form-control" id="@fields[i].Name">
-                       </td>
-                    };
+            @{
+                System.Reflection.PropertyInfo[] fields = Model.Input.GetType().GetProperties();
+
+                uint rowCounter = IndexViewModel.rowCounter;
+
+
+                for (int x = 0; x < IndexViewModel.rowCounter; x++)
+                {
+                    <td rowspan="2">1</td>
+                    <tr>
+                        @{
+                            for (int y = 0; y < fields.Length; y++)
+                            {
+                                <td>
+                                    <input type="text" name="@fields[y].Name" value="@fields[y].GetValue(Model.Input)" class="form-control" id="@fields[y].Name">
+                                </td>
+                            }
+                        }
+                    </tr>
                 }
 
-                @*<td>
-                    <input type="text" name="Air_Spend" value="@Model.Input.Air_Spend" class="form-control" id="number1">
-                </td>
-                <td>
-                    <input type="text" name="Air_Pressure" value="@Model.Input.Air_Pressure" class="form-control" id="number1">
-                </td>
-                <td>
-                    <input type="text" name="Air_Temperature" value="@Model.Input.Air_Temperature" class="form-control" id="number1">
-                </td>
-                <td>
-                    <input type="text" name="Smoke_Temperature" value="@Model.Input.Smoke_Temperature" class="form-control" id="number1">
-                </td>
-                <td>
-                    <input type="text" name="Viscosity" value="@Model.Input.Viscosity" class="form-control" id="number1">
-                </td>
-                <td>
-                    <input type="text" name="Melt_Temperature" value="@Model.Input.Melt_Temperature" class="form-control" id="number1">
-                </td>
-                <td>
-                    <input type="text" name="CO_Percentage" value="@Model.Input.CO_Percentage" class="form-control" id="number1">
-                </td>
-                <td>
-                    <input type="text" name="CO2_Percentage" value="@Model.Input.CO2_Percentage" class="form-control" id="number1">
-                </td>
-                <td>
-                    <input type="text" name="N2_Percentage" value="@Model.Input.N2_Percentage" class="form-control" id="number1">
-                </td>
-                <td>
-                    <input type="text" name="O2_Percentage" value="@Model.Input.O2_Percentage" class="form-control" id="number1">
-                </td>*@
-             </tr>
+                <p>@rowCounter</p>
+            }
+
         </table>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" value="Calculate" name="buttonType" class="btn btn-primary">Calculate</button>
+        <button type="submit" value="AddNewRow" name="buttonType" class="btn btn-primary">+</button>
+
+        @{
+            if (IndexViewModel.rowCounter > 1)
+            {
+                <button type="submit" value="RemoveNewRow" name="buttonType" class="btn btn-primary">-</button>
+            }
+        }
     </form>
 </div>
