@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IndexViewModel;
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -10,33 +11,56 @@
 <div class="main-content">
     <h3>Исходные данные</h3>
     <form form action="/Home/Index" method="post">
-        <table class="table">
+        <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">Смены</th>
-                    <th scope="col">Расход воздуха, м3/ч</th>
-                    <th scope="col">Давление воздуха, мбар</th>
+                    <th>Смены</th>
+                    <th>Расход воздуха, м3/ч</th>
+                    <th>Давление воздуха, мбар</th>
+                    <th>Температура подогрева воздуха, *C</th>
+                    <th>Температура отходящих газов, *C</th>
+                    <th>Вязкость, усл. ед.</th>
+                    <th>Температура расплава, *C</th>
+                    <th>Содержание CO, %</th>
+                    <th>Содержание CO2, %</th>
+                    <th>Содержание N2, %</th>
+                    <th>Содержание O2, %</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>
-                        <input type="text" name="first_number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>
-                        <input type="text" name="second__number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    </td>
-                </tr>
-                @*<tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                </tr>*@
-            </tbody>
+
+            @{
+                System.Reflection.PropertyInfo[] fields = Model.Input.GetType().GetProperties();
+
+                uint rowCounter = IndexViewModel.rowCounter;
+
+
+                for (int x = 0; x < IndexViewModel.rowCounter; x++)
+                {
+                    <td rowspan="2">1</td>
+                    <tr>
+                        @{
+                            for (int y = 0; y < fields.Length; y++)
+                            {
+                                <td>
+                                    <input type="text" name="@fields[y].Name" value="@fields[y].GetValue(Model.Input)" class="form-control" id="@fields[y].Name">
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+
+                <p>@rowCounter</p>
+            }
+
         </table>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" value="Calculate" name="buttonType" class="btn btn-primary">Calculate</button>
+        <button type="submit" value="AddNewRow" name="buttonType" class="btn btn-primary">+</button>
+
+        @{
+            if (IndexViewModel.rowCounter > 1)
+            {
+                <button type="submit" value="RemoveNewRow" name="buttonType" class="btn btn-primary">-</button>
+            }
+        }
     </form>
 </div>
