@@ -18,8 +18,7 @@ namespace ImpactCalculateWebApplication.Models
         public double N2_Percentage { get; set; }
         public double O2_Percentage { get; set; }
 
-
-        public static InputDataModel GetDefaulData()
+        public static InputDataModel GetDefaultData()
         {
             return new InputDataModel
             {
@@ -35,5 +34,7 @@ namespace ImpactCalculateWebApplication.Models
                 O2_Percentage = 1.23
             };
         }
+
+
     }
 }
