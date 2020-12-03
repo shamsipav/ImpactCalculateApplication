@@ -1,6 +1,8 @@
 ﻿@model IndexViewModel;
 @{
     ViewData["Title"] = "Home Page";
+
+    CocksModel cocksModel = new CocksModel();
 }
 
 @*<div class="main-head text-center">
@@ -17,12 +19,17 @@
             Выбор кокса
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            @{               
-//System.Reflection.PropertyInfo[] cocks = CocksModel.GetType().GetProperties();
+            @{
+
+                System.Reflection.PropertyInfo[] cocks = cocksModel.GetType().GetProperties();
+
+                for (int i = 0; i < cocks.Length; i++)
+                {
+                        <a class="dropdown-item" href="#@(
+                        ((Cocks)cocks[i].GetValue(cocksModel)).Q
+                        )">@(((Cocks)cocks[i].GetValue(cocksModel)).Name)</a>
+                }
             }
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
         </div>
     </div>
 </div>
@@ -49,7 +56,7 @@
                 </tr>
             </thead>
 
-            @{
+            @*@{
                 System.Reflection.PropertyInfo[] fields = Model.Input.GetType().GetProperties();
 
                 uint rowCounter = IndexViewModel.rowCounter;
@@ -71,7 +78,7 @@
                 }
 
                 <p>@rowCounter</p>
-            }
+            }*@
 
         </table>
         <button type="submit" value="Calculate" name="buttonType" class="btn btn-primary">Calculate</button>

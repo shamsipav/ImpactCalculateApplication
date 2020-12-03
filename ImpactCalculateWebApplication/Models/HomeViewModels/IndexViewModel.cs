@@ -15,8 +15,8 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
 
         public IndexViewModel()
         {
-            Inputs = new List<InputDataModel>();
-            Inputs[0]= InputDataModel.GetDefaultData();
+            Inputs = new List<InputDataModel>() { InputDataModel.GetDefaultData() };
+            //Inputs[0]= InputDataModel.GetDefaultData();
         }
 
         public void CalculateResults()
