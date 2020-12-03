@@ -32,7 +32,6 @@ namespace ImpactCalculateWebApplication.Controllers
 
                 viewModel = new IndexViewModel
                 {
-                    Result = result,
                     Input = input
                 };
 
@@ -41,20 +40,12 @@ namespace ImpactCalculateWebApplication.Controllers
 
             if (buttonType == "AddNewRow")
             {
-                var ViewModel = new IndexViewModel();
-
                 IndexViewModel.rowCounter++;
-
-                return View(ViewModel);
             }
 
             if (buttonType == "RemoveNewRow")
             {
-                var ViewModel = new IndexViewModel();
-
                 IndexViewModel.rowCounter--;
-
-                return View(ViewModel);
             }
 
             return View(new IndexViewModel());
@@ -76,8 +67,6 @@ namespace ImpactCalculateWebApplication.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-
 
         public void CreateDBContext()
         {

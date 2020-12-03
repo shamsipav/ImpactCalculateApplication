@@ -3,15 +3,36 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="main-head text-center">
+@*<div class="main-head text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>*@
+
+<div class="col-md-2 d-none d-md-block bg-light sidebar">
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <span>Постоянные величины</span>
+    </h6>
+    <div class="dropdown d-flex justify-content-between align-items-center px-3 mt-4 mb-1">
+        <button class="btn btn-light btn-sm dropdown-toggle text-muted" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Выбор кокса
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            @{               
+//System.Reflection.PropertyInfo[] cocks = CocksModel.GetType().GetProperties();
+            }
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+    </div>
 </div>
 
 <div class="main-content">
-    <h3>Исходные данные</h3>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Исходные данные</h1>
+    </div>
     <form form action="/Home/Index" method="post">
-        <table class="table table-bordered">
+        <table class="table table-bordered table-responsive">
             <thead>
                 <tr>
                     <th>Смены</th>
