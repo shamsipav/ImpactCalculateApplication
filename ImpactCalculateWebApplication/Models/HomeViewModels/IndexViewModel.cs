@@ -7,19 +7,36 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
 {
     public class IndexViewModel
     {
-        public InputDataModel Input { get; set; }
+        public Cocks selectedCocks;
 
-        public ResultDataModel Result { get; set; }
+        public List<InputDataModel> Inputs { get; set; }
+
+        public List<ResultDataModel> Results { get; set; }
 
         public IndexViewModel()
         {
-            Input = InputDataModel.GetDefaultData();
+            Inputs = new List<InputDataModel>();
+            Inputs[0]= InputDataModel.GetDefaultData();
         }
 
-        public void CalculateResult()
+        public void CalculateResults()
         {
-            Result.Gas.A = 1f / (1f - 3.76f * (Input.O2_Percentage - 0.5f * Input.CO_Percentage) / Input.N2_Percentage);
-            //Result.Gas.V_Alpha = Result.Gas.A*
+            foreach(InputDataModel input in Inputs)
+            {
+                Results.Add(CalculateResult(input));
+            }
+            
+        }
+
+        public ResultDataModel CalculateResult(InputDataModel input)
+        { 
+            var result = new ResultDataModel();
+            result.Gas.A = 1f / (1f - 3.76f * (input.O2_Percentage - 0.5f * input.CO_Percentage) / input.N2_Percentage);
+            
+            //result.Gas.V_Alpha = result.Gas.A*
+
+
+            return result;
         }
 
         public static uint rowCounter = 1;
