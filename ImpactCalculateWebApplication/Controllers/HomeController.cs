@@ -27,7 +27,7 @@ namespace ImpactCalculateWebApplication.Controllers
         [HttpPost]
         public IActionResult Index(double debil)
         {
-            //AddInputDBData();
+            AddInputDBData();
 
             viewModel.CalculateResults();
 
@@ -38,11 +38,11 @@ namespace ImpactCalculateWebApplication.Controllers
         {
             viewModel = new IndexViewModel();
 
-            //using (var db = new ImpactCalculationDBContext())
-            //{
-            //    viewModel.Inputs = db.Inputs.ToList();
-            //    originRowCount = viewModel.Inputs.Count;
-            //}
+            using (var db = new ImpactCalculationDBContext())
+            {
+                viewModel.Inputs = db.Inputs.ToList();
+                originRowCount = viewModel.Inputs.Count;
+            }
 
             //CreateDBContext();
             return View(viewModel);
