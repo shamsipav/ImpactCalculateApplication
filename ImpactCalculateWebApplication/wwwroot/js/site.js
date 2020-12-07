@@ -3,6 +3,3 @@
 
 // Write your JavaScript code.
 
-//$("#add-row").click(function () {
-//    $("body").css("opacity", "0");
-//})

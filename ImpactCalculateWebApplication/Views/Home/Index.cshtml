@@ -10,37 +10,41 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>*@
 
-<div class="col-md-2 d-none d-md-block bg-light sidebar">
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-        <span>Постоянные величины</span>
-    </h6>
-    <div class="dropdown d-flex justify-content-between align-items-center px-3 mt-4 mb-1">
-        <button class="btn btn-light btn-sm dropdown-toggle text-muted" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Выбор кокса
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            @{
+    <div class="col-md-2 d-none d-md-block bg-light sidebar">
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Постоянные величины</span>
+        </h6>
+        <div class="dropdown d-flex justify-content-between align-items-center px-3 mt-4 mb-1">
+            <button class="btn btn-light btn-sm dropdown-toggle text-muted" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Выбор кокса
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @{
 
-                System.Reflection.PropertyInfo[] cocks = cocksModel.GetType().GetProperties();
+                    System.Reflection.PropertyInfo[] cocks = cocksModel.GetType().GetProperties();
 
-                for (int i = 0; i < cocks.Length; i++)
-                {
+                    for (int i = 0; i < cocks.Length; i++)
+                    {
                         <a class="dropdown-item" href="#@(
                         ((Cocks)cocks[i].GetValue(cocksModel)).Q
                         )">@(((Cocks)cocks[i].GetValue(cocksModel)).Name)</a>
+                    }
                 }
-            }
+            </div>
+        </div>
+        <div class="px-3 mt-4 mb-">
+            <button type="submit" id="AddNewRow" name="buttonType" class="btn btn-light btn-sm">+</button>
+            <button type="submit" id="RemoveNewRow" name="buttonType" class="btn btn-light btn-sm">-</button>
         </div>
     </div>
-</div>
 
 <div class="main-content">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Исходные данные</h1>
     </div>
     <form form action="/Home/Index" method="post">
-        <table class="table table-bordered table-responsive">
-            <thead>
+        <table id="table" class="table table-bordered table-responsive">
+            <thead class="sticky-header">
                 <tr>
                     <th>Смены</th>
                     <th>Расход воздуха, м3/ч</th>
@@ -55,40 +59,106 @@
                     <th>Содержание O2, %</th>
                 </tr>
             </thead>
+            <tr>
+                <td rowspan="12">1</td>
+                <td>
+                    <input type="text" name="Air_Spend" value="@Model.Input.Air_Spend" class="form-control air-spend" id="air-spend">
+                </td>
+                <td>
+                    <input type="text" name="Air_Pressure" value="@Model.Input.Air_Pressure" class="form-control air-ressure" id="air-ressure">
+                </td>
+                <td>
+                    <input type="text" name="Air_Temperature" value="@Model.Input.Air_Temperature" class="form-control air-temperature" id="air-temperature">
+                </td>
+                <td>
+                    <input type="text" name="Smoke_Temperature" value="@Model.Input.Smoke_Temperature" class="form-control smoke-temperature" id="smoke-temperature">
+                </td>
+                <td>
+                    <input type="text" name="Viscosity" value="@Model.Input.Viscosity" class="form-control viscosity" id="viscosity">
+                </td>
+                <td>
+                    <input type="text" name="Melt_Temperature" value="@Model.Input.Melt_Temperature" class="form-control melt-temperature" id="melt-temperature">
+                </td>
+                <td>
+                    <input type="text" name="CO_Percentage" value="@Model.Input.CO_Percentage" class="form-control co-percentage" id="co-percentage">
+                </td>
+                <td>
+                    <input type="text" name="CO2_Percentage" value="@Model.Input.CO2_Percentage" class="form-control co2-percentage" id="co2-percentage">
+                </td>
+                <td>
+                    <input type="text" name="N2_Percentage" value="@Model.Input.N2_Percentage" class="form-control n2-percentage" id="n2-percentage">
+                </td>
+                <td>
+                    <input type="text" name="O2_Percentage" value="@Model.Input.O2_Percentage" class="form-control o2-percentage" id="o2-percentage">
+                </td>
+            </tr>
 
-            @*@{
-                System.Reflection.PropertyInfo[] fields = Model.Input.GetType().GetProperties();
+            <script>
+                $(document).ready(function () {
 
-                uint rowCounter = IndexViewModel.rowCounter;
+                    let rowCount = $('table tr').length - 1;
+                    let shiftCount = 1;
+                    let shiftTime = 12;
+                    console.log(rowCount);
 
+                    $('#AddNewRow').on('click', function () {
 
-                for (int x = 0; x < IndexViewModel.rowCounter; x++)
-                {
-                    <td rowspan="2">1</td>
-                    <tr>
-                        @{
-                            for (int y = 0; y < fields.Length; y++)
-                            {
-                                <td>
-                                    <input type="text" name="@fields[y].Name" value="@fields[y].GetValue(Model.Input)" class="form-control" id="@fields[y].Name">
-                                </td>
-                            }
+                        rowCount++;
+                        console.log(rowCount);
+
+                        if (rowCount % shiftTime == 1) {
+                            shiftCount++;
+                            console.log("shift : " + shiftCount);
+                            $('tbody').append(`<tr>
+                            <td class="text-center" rowspan="${shiftTime}">${shiftCount}</td>
+                            </tr>`);
                         }
-                    </tr>
-                }
 
-                <p>@rowCounter</p>
-            }*@
+                        $('tbody').append(`<tr>
+                            <td>
+                                <input type="text" name="Air_Spend" value="@Model.Input.Air_Spend" class="form-control air-spend" id="air-spend">
+                            </td>
+                            <td>
+                                <input type="text" name="Air_Pressure" value="@Model.Input.Air_Pressure" class="form-control air-ressure" id="air-ressure">
+                            </td>
+                            <td>
+                                <input type="text" name="Air_Temperature" value="@Model.Input.Air_Temperature" class="form-control air-temperature" id="air-temperature">
+                            </td>
+                            <td>
+                                <input type="text" name="Smoke_Temperature" value="@Model.Input.Smoke_Temperature" class="form-control smoke-temperature" id="smoke-temperature">
+                            </td>
+                            <td>
+                                <input type="text" name="Viscosity" value="@Model.Input.Viscosity" class="form-control viscosity" id="viscosity">
+                            </td>
+                            <td>
+                                <input type="text" name="Melt_Temperature" value="@Model.Input.Melt_Temperature" class="form-control melt-temperature" id="melt-temperature">
+                            </td>
+                            <td>
+                                <input type="text" name="CO_Percentage" value="@Model.Input.CO_Percentage" class="form-control co-percentage" id="co-percentage">
+                            </td>
+                            <td>
+                                <input type="text" name="CO2_Percentage" value="@Model.Input.CO2_Percentage" class="form-control co2-percentage" id="co2-percentage">
+                            </td>
+                            <td>
+                                <input type="text" name="N2_Percentage" value="@Model.Input.N2_Percentage" class="form-control n2-percentage" id="n2-percentage">
+                            </td>
+                            <td>
+                                <input type="text" name="O2_Percentage" value="@Model.Input.O2_Percentage" class="form-control o2-percentage" id="o2-percentage">
+                            </td>
+                        </tr>`);
+
+
+                        $("html,body").animate({
+                            scrollTop: $("#Calculate").offset().top
+                        });
+
+
+                    });
+
+                });
+            </script>
 
         </table>
-        <button type="submit" value="Calculate" name="buttonType" class="btn btn-primary">Calculate</button>
-        <button type="submit" value="AddNewRow" name="buttonType" class="btn btn-primary">+</button>
-
-        @{
-            if (IndexViewModel.rowCounter > 1)
-            {
-                <button type="submit" value="RemoveNewRow" name="buttonType" class="btn btn-primary">-</button>
-            }
-        }
+        <button type="submit" id="Calculate" name="buttonType" class="btn btn-primary">Calculate</button>
     </form>
 </div>

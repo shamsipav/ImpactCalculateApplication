@@ -21,35 +21,30 @@ namespace ImpactCalculateWebApplication.Controllers
             _logger = logger;
         }
 
+        // List<InputDataModel> input
         [HttpPost]
-        public IActionResult Index(List<InputDataModel> input, string buttonType)
+        public IActionResult Index(InputDataModel input)
         {
-            IndexViewModel viewModel = new IndexViewModel();
+            //IndexViewModel viewModel = new IndexViewModel();
 
-            if (buttonType == "Calculate")
+            //viewModel.Inputs = input;
+
+            //viewModel.CalculateResults();
+
+            double result = input.Air_Spend + input.Air_Pressure;
+
+            var viewModel = new IndexViewModel
             {
-                viewModel.Inputs = input;
+                Result = result,
+                Input = input
+            };
 
-                viewModel.CalculateResults();
-
-                return View("Result", viewModel);
-            }
-
-            if (buttonType == "AddNewRow")
-            {
-                IndexViewModel.rowCounter++;
-            }
-
-            if (buttonType == "RemoveNewRow")
-            {
-                IndexViewModel.rowCounter--;
-            }
-
-            return View(viewModel);
+            return View("Result", viewModel);
         }
 
         public IActionResult Index()
         {
+            InputDataModel.GetDefaultData();
             //CreateDBContext();
             return View(new IndexViewModel());
         }

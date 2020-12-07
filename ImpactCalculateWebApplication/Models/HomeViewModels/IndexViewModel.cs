@@ -7,38 +7,47 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
 {
     public class IndexViewModel
     {
-        public Cocks selectedCocks;
+        public InputDataModel Input { get; set; }
 
-        public List<InputDataModel> Inputs { get; set; }
-
-        public List<ResultDataModel> Results { get; set; }
+        public double Result { get; set; }
 
         public IndexViewModel()
         {
-            Inputs = new List<InputDataModel>() { InputDataModel.GetDefaultData() };
-            //Inputs[0]= InputDataModel.GetDefaultData();
+            Input = new InputDataModel();
         }
 
-        public void CalculateResults()
-        {
-            foreach(InputDataModel input in Inputs)
-            {
-                Results.Add(CalculateResult(input));
-            }
-            
-        }
+        //public Cocks selectedCocks;
 
-        public ResultDataModel CalculateResult(InputDataModel input)
-        { 
-            var result = new ResultDataModel();
-            result.Gas.A = 1f / (1f - 3.76f * (input.O2_Percentage - 0.5f * input.CO_Percentage) / input.N2_Percentage);
-            
-            //result.Gas.V_Alpha = result.Gas.A*
+        //public List<InputDataModel> Inputs { get; set; }
+
+        //public List<ResultDataModel> Results { get; set; }
+
+        //public IndexViewModel()
+        //{
+        //    Inputs = new List<InputDataModel>() { InputDataModel.GetDefaultData() };
+        //    //Inputs[0]= InputDataModel.GetDefaultData();
+        //}
+
+        //public void CalculateResults()
+        //{
+        //    foreach(InputDataModel input in Inputs)
+        //    {
+        //        Results.Add(CalculateResult(input));
+        //    }
+
+        //}
+
+        //public ResultDataModel CalculateResult(InputDataModel input)
+        //{ 
+        //    var result = new ResultDataModel();
+        //    result.Gas.A = 1f / (1f - 3.76f * (input.O2_Percentage - 0.5f * input.CO_Percentage) / input.N2_Percentage);
+
+        //    //result.Gas.V_Alpha = result.Gas.A*
 
 
-            return result;
-        }
+        //    return result;
+        //}
 
-        public static uint rowCounter = 1;
+        //public static uint rowCounter = 1;
     }
 }
