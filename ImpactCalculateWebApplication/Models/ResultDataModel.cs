@@ -6,8 +6,8 @@ namespace ImpactCalculateWebApplication.Models
 {
     public class ResultDataModel
     {
-        public A_AV_VW Gas { get; set; }
-        public A_AV_VW Device { get; set; }
+        public A_AV_VW Gas { get; set; } = new A_AV_VW();
+        public A_AV_VW Device { get; set; } = new A_AV_VW();
 
         public double Waste_Difference { get; set; }
 
@@ -18,5 +18,7 @@ namespace ImpactCalculateWebApplication.Models
         public double A { get; set; }
         public double V_Alpha { get; set; }
         public double V_Waste { get; set; }
+
     }
+
 }

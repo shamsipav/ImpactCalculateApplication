@@ -21,32 +21,23 @@ namespace ImpactCalculateWebApplication.Controllers
             _logger = logger;
         }
 
-        // List<InputDataModel> input
         [HttpPost]
-        public IActionResult Index(InputDataModel input)
+        public IActionResult Index(List<InputDataModel> input)
         {
-            //IndexViewModel viewModel = new IndexViewModel();
+            IndexViewModel viewModel = new IndexViewModel();
 
             //viewModel.Inputs = input;
 
-            //viewModel.CalculateResults();
-
-            double result = input.Air_Spend + input.Air_Pressure;
-
-            var viewModel = new IndexViewModel
-            {
-                Result = result,
-                Input = input
-            };
+            viewModel.CalculateResults();
 
             return View("Result", viewModel);
         }
 
         public IActionResult Index()
         {
-            InputDataModel.GetDefaultData();
+            IndexViewModel viewModel = new IndexViewModel();
             //CreateDBContext();
-            return View(new IndexViewModel());
+            return View(viewModel);
         }
 
         public IActionResult Privacy()

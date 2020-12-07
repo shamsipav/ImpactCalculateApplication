@@ -7,47 +7,36 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
 {
     public class IndexViewModel
     {
-        public InputDataModel Input { get; set; }
+        public Cocks selectedCocks;
 
-        public double Result { get; set; }
+        public List<InputDataModel> Inputs { get; set; }
+
+        public List<ResultDataModel> Results { get; set; }
 
         public IndexViewModel()
         {
-            Input = new InputDataModel();
+            Inputs = new List<InputDataModel>() { InputDataModel.GetDefaultData() };
+            Results = new List<ResultDataModel>();
         }
 
-        //public Cocks selectedCocks;
+        public void CalculateResults()
+        {
+            foreach (InputDataModel input in Inputs)
+            {
+                Results.Add(CalculateResult(input));
+            }
 
-        //public List<InputDataModel> Inputs { get; set; }
+        }
 
-        //public List<ResultDataModel> Results { get; set; }
+        public ResultDataModel CalculateResult(InputDataModel input)
+        {
+            var result = new ResultDataModel();
 
-        //public IndexViewModel()
-        //{
-        //    Inputs = new List<InputDataModel>() { InputDataModel.GetDefaultData() };
-        //    //Inputs[0]= InputDataModel.GetDefaultData();
-        //}
+            result.Gas.A = 1f / (1f - 3.76f * (input.O2_Percentage - 0.5f * input.CO_Percentage) / input.N2_Percentage);
 
-        //public void CalculateResults()
-        //{
-        //    foreach(InputDataModel input in Inputs)
-        //    {
-        //        Results.Add(CalculateResult(input));
-        //    }
+            //result.Gas.V_Alpha = result.Gas.A*
 
-        //}
-
-        //public ResultDataModel CalculateResult(InputDataModel input)
-        //{ 
-        //    var result = new ResultDataModel();
-        //    result.Gas.A = 1f / (1f - 3.76f * (input.O2_Percentage - 0.5f * input.CO_Percentage) / input.N2_Percentage);
-
-        //    //result.Gas.V_Alpha = result.Gas.A*
-
-
-        //    return result;
-        //}
-
-        //public static uint rowCounter = 1;
+            return result;
+        }
     }
 }
