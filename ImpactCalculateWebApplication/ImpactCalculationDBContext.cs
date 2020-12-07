@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ImpactCalculateWebApplication.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ImpactCalculateWebApplication
@@ -8,6 +9,8 @@ namespace ImpactCalculateWebApplication
     class ImpactCalculationDBContext : DbContext
     {
         public DbSet<SourceData> Sources { get; set; }
+        public DbSet<InputDataModel> Inputs { get; set; }
+        public DbSet<ResultDataModel> Result { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlite("Data Source=ImpactCalculateDB.db");

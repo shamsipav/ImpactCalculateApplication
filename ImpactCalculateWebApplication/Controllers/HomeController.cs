@@ -7,14 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ImpactCalculateWebApplication.Models;
 using ImpactCalculateWebApplication.Models.HomeViewModels;
-
+using System.Security.AccessControl;
 
 namespace ImpactCalculateWebApplication.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        //public static int result;
+
+        static IndexViewModel viewModel;
+
+        int originRowCount;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -22,11 +25,9 @@ namespace ImpactCalculateWebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(List<InputDataModel> input)
+        public IActionResult Index(double debil)
         {
-            IndexViewModel viewModel = new IndexViewModel();
-
-            //viewModel.Inputs = input;
+            //AddInputDBData();
 
             viewModel.CalculateResults();
 
@@ -35,7 +36,14 @@ namespace ImpactCalculateWebApplication.Controllers
 
         public IActionResult Index()
         {
-            IndexViewModel viewModel = new IndexViewModel();
+            viewModel = new IndexViewModel();
+
+            //using (var db = new ImpactCalculationDBContext())
+            //{
+            //    viewModel.Inputs = db.Inputs.ToList();
+            //    originRowCount = viewModel.Inputs.Count;
+            //}
+
             //CreateDBContext();
             return View(viewModel);
         }
@@ -51,26 +59,17 @@ namespace ImpactCalculateWebApplication.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public void CreateDBContext()
+        
+
+        public void AddInputDBData()
         {
             using (var db = new ImpactCalculationDBContext())
             {
-
-
-                db.Sources.Add(new SourceData()
+                for (int i = originRowCount; i < viewModel.Inputs.Count; i++)
                 {
-                    Air_Pressure = 1,
-                    Air_Spend = 2,
-                    Air_Temperature = 3,
-                    Smoke_Temperature = 4,
-                    Melt_Temperature = 5,
-                    Viscosity = 6,
-                    CO_Percentage = 7,
-                    CO2_Percentage = 8,
-                    O2_Percentage = 9,
-                    N2_Percentage = 10
-                });
-
+                    db.Inputs.Add(viewModel.Inputs[i]);
+                }
+        
                 db.SaveChanges();
             }
         }

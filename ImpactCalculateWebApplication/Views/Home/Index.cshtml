@@ -118,38 +118,41 @@
                             </tr>`);
                         }
 
-                        @{ Model.Inputs.Add(new InputDataModel());}
+                        @{ InputDataModel input = new InputDataModel();
+
+                            Model.Inputs.Add(input);
+                         }
 
                         $('tbody').append(`<tr>
                             <td>
-                                <input type="text" name="Air_Spend" value="@Model.Inputs[Model.Inputs.Count].Air_Spend" class="form-control air-spend" id="air-spend">
+                                <input type="text" name="Air_Spend" value="@input.Air_Spend" class="form-control air-spend" id="air-spend">
                             </td>
                             <td>
-                                <input type="text" name="Air_Pressure" value="@Model.Inputs[Model.Inputs.Count].Air_Pressure" class="form-control air-ressure" id="air-ressure">
+                                <input type="text" name="Air_Pressure" value="@input.Air_Pressure" class="form-control air-ressure" id="air-ressure">
                             </td>
                             <td>
-                                <input type="text" name="Air_Temperature" value="@Model.Inputs[Model.Inputs.Count].Air_Temperature" class="form-control air-temperature" id="air-temperature">
+                                <input type="text" name="Air_Temperature" value="@input.Air_Temperature" class="form-control air-temperature" id="air-temperature">
                             </td>
                             <td>
-                                <input type="text" name="Smoke_Temperature" value="@Model.Inputs[Model.Inputs.Count].Smoke_Temperature" class="form-control smoke-temperature" id="smoke-temperature">
+                                <input type="text" name="Smoke_Temperature" value="@input.Smoke_Temperature" class="form-control smoke-temperature" id="smoke-temperature">
                             </td>
                             <td>
-                                <input type="text" name="Viscosity" value="@Model.Inputs[Model.Inputs.Count].Viscosity" class="form-control viscosity" id="viscosity">
+                                <input type="text" name="Viscosity" value="@input.Viscosity" class="form-control viscosity" id="viscosity">
                             </td>
                             <td>
-                                <input type="text" name="Melt_Temperature" value="@Model.Inputs[Model.Inputs.Count].Melt_Temperature" class="form-control melt-temperature" id="melt-temperature">
+                                <input type="text" name="Melt_Temperature" value="@input.Melt_Temperature" class="form-control melt-temperature" id="melt-temperature">
                             </td>
                             <td>
-                                <input type="text" name="CO_Percentage" value="@Model.Inputs[Model.Inputs.Count].CO_Percentage" class="form-control co-percentage" id="co-percentage">
+                                <input type="text" name="CO_Percentage" value="@input.CO_Percentage" class="form-control co-percentage" id="co-percentage">
                             </td>
                             <td>
-                                <input type="text" name="CO2_Percentage" value="@Model.Inputs[Model.Inputs.Count].CO2_Percentage" class="form-control co2-percentage" id="co2-percentage">
+                                <input type="text" name="CO2_Percentage" value="@input.CO2_Percentage" class="form-control co2-percentage" id="co2-percentage">
                             </td>
                             <td>
-                                <input type="text" name="N2_Percentage" value="@Model.Inputs[Model.Inputs.Count].N2_Percentage" class="form-control n2-percentage" id="n2-percentage">
+                                <input type="text" name="N2_Percentage" value="@input.N2_Percentage" class="form-control n2-percentage" id="n2-percentage">
                             </td>
                             <td>
-                                <input type="text" name="O2_Percentage" value="@Model.Inputs[Model.Inputs.Count].O2_Percentage" class="form-control o2-percentage" id="o2-percentage">
+                                <input type="text" name="O2_Percentage" value="@input.O2_Percentage" class="form-control o2-percentage" id="o2-percentage">
                             </td>
                         </tr>`);
 

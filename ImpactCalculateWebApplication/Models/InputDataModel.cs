@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +8,9 @@ namespace ImpactCalculateWebApplication.Models
 {
     public class InputDataModel
     {
+        [Key]
+        public int Key { get; set; }
+
         public double Air_Spend { get; set; }
         public double Air_Pressure { get; set; }
         public double Air_Temperature { get; set; }
