@@ -11,6 +11,9 @@ namespace ImpactCalculateWebApplication.Models
 
         public double Waste_Difference { get; set; }
 
+
+
+
     }
     
     public class A_AV_VW
